@@ -2,3 +2,11 @@ myapp:
   line:
     line-token: ${LINE_TOKEN}
     line-secret: ${LINE_SECRET}
+
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
+server:
+  port: ${PORT:8080}
