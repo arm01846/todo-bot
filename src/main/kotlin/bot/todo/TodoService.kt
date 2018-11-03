@@ -8,7 +8,8 @@ import reactor.core.publisher.Mono
 
 @Service
 class TodoService (
-        val todoRepository: TodoRepository
+        val todoRepository: TodoRepository,
+        val lineService: LineService
 ) {
 
     fun process(event: MessageEvent<MessageContent>) {
@@ -17,6 +18,10 @@ class TodoService (
         when (message) {
             is TextMessageContent -> {
                 val textCommand = message.text
+                if (textCommand == "edit") {
+                    lineService.reply(event.replyToken, "line://app/1619431141-PZJBpK4J")
+                    return
+                }
                 val todo = Command.parse(textCommand)
                 todo.user = user
                 this.todoRepository.save(todo).subscribe()

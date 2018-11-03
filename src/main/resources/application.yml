@@ -1,0 +1,4 @@
+myapp:
+  line:
+    line-token: ${LINE_TOKEN}
+    line-secret: ${LINE_SECRET}
