@@ -8,7 +8,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 object Command {
-    fun parse(user: String, textCommand: String): Todo {
+    fun parse(textCommand: String): Todo {
         val token = textCommand.split(':', limit=3)
         val message = token[0].trim()
         val date = when (token[1].trim()) {
@@ -23,21 +23,21 @@ object Command {
             LocalTime.of(12, 0)
         }
 
-        return Todo(user, message, LocalDateTime.of(date, time))
+        return Todo(message, LocalDateTime.of(date, time))
     }
 }
 
-@Document(collection = "todo")
+@Document(collection = "todoRepository")
 @CompoundIndex(
         name = "todo_index",
         def = "{'user' : 1, 'isImportant': -1, 'dateTime': 1}"
 )
 data class Todo(
-        val user: String,
         val message: String,
         val dateTime: LocalDateTime
 ) {
-    val id: String? = null
+    lateinit var id: String
+    lateinit var user: String
     var isImportant: Boolean = false
     var isFinished: Boolean = false
 }
