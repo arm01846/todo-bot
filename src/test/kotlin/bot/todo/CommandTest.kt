@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 class CommandTest {
 
     @Test
-    fun parse_validCommand_shouldCreateNewTask() {
+    fun parse_validCommand_shouldCreateTodo() {
         assertEquals(
                 Todo("Buy milk", LocalDateTime.of(2018, 5, 3, 13, 0)),
                 Command.parse("Buy milk : 3/5/18 : 13:00")
