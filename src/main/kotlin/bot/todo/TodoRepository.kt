@@ -16,16 +16,16 @@ interface TodoRepository: ReactiveMongoRepository<Todo, String>, CustomTodoRepos
 }
 
 interface CustomTodoRepository {
-    fun markCompleted(id: String): Mono<Todo>
+    fun markImportant(id: String): Mono<Todo>
     fun markFinished(id: String): Mono<Todo>
 }
 
 class CustomTodoRepositoryImpl (
         private val mongoTemplate: ReactiveMongoTemplate
 ): CustomTodoRepository {
-    override fun markCompleted(id: String): Mono<Todo> {
+    override fun markImportant(id: String): Mono<Todo> {
         val query = Query.query(Criteria.where("_id").`is`(id))
-        val update = Update.update("isCompleted", true)
+        val update = Update.update("isImportant", true)
         return mongoTemplate.findAndModify(query, update, Todo::class.java)
     }
 

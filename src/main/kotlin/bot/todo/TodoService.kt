@@ -31,13 +31,15 @@ class TodoService (
         }
     }
 
-    fun markFinished(id: String): Mono<Todo>
+    fun markFinished(id: String): Flux<Todo>
         = (todoRepository as CustomTodoRepository).markFinished(id)
             .switchIfEmpty(Mono.error(NotFoundException()))
+            .flatMapMany { it -> list(it.user) }
 
-    fun markImportant(id: String): Mono<Todo>
-        = (todoRepository as CustomTodoRepository).markFinished(id)
+    fun markImportant(id: String): Flux<Todo>
+        = (todoRepository as CustomTodoRepository).markImportant(id)
             .switchIfEmpty(Mono.error(NotFoundException()))
+            .flatMapMany { it -> list(it.user) }
 
     fun list(user: String): Flux<Todo>
         = todoRepository.findByUser(
