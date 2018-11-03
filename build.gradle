@@ -2,6 +2,7 @@ buildscript {
     ext {
         kotlinVersion = '1.2.71'
         springBootVersion = '2.1.0.RELEASE'
+        lineVersion = '2.1.0'
     }
     repositories {
         mavenCentral()
@@ -46,6 +47,7 @@ dependencies {
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.linecorp.bot:line-bot-spring-boot:$lineVersion")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('io.projectreactor:reactor-test')
 }
