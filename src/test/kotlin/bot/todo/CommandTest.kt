@@ -33,5 +33,10 @@ class CommandTest {
                 Todo("Watch movie", LocalDateTime.of(2018, 12, 30, 8, 0)),
                 Command.parse("Watch movie : 30/12/18 : 8:00")
         )
+
+        assertEquals(
+                Todo("Watch movie", LocalDateTime.of(2018, 12, 30, 12, 0)),
+                Command.parse("Watch movie : 30/12/18")
+        )
     }
 }

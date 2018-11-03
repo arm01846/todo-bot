@@ -15,7 +15,11 @@ object Command {
             else -> LocalDate.parse(token[1].trim(), DateTimeFormatter.ofPattern("d/M/yy"))
         }
 
-        val time = LocalTime.parse(token[2].trim(), DateTimeFormatter.ofPattern("H:m"))
+        val time = if (token.size > 2) {
+            LocalTime.parse(token[2].trim(), DateTimeFormatter.ofPattern("H:m"))
+        } else {
+            LocalTime.of(12, 0)
+        }
 
         return Todo(message, LocalDateTime.of(date, time))
     }
