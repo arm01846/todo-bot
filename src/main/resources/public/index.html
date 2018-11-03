@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>TODO</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    </head>
+
+    <body>
+        <div id="output">Loading...</div>
+        <template id="template">
+            <div id="{{id}}" class="{{class}}">
+                <p>{{message}}</p>
+                <p>{{dateTime}}</p>
+                <button class="important-button" data-id="{{id}}">important</button>
+                <input class="finished-checkbox" type="checkbox" data-id="{{id}}" {{checked}}/>
+            </div>
+        </template>
+        <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

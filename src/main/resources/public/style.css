@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+}
+
+#output {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #EEE;
+}
+
+.todo.finished {
+    text-decoration: line-through;
+    pointer-events: none;
+}
+
+.todo.important {
+    color: white;
+    background-color: #444;
+}
