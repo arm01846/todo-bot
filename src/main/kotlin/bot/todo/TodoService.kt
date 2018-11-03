@@ -3,7 +3,9 @@ package bot.todo
 import com.linecorp.bot.model.event.MessageEvent
 import com.linecorp.bot.model.event.message.MessageContent
 import com.linecorp.bot.model.event.message.TextMessageContent
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
@@ -36,6 +38,12 @@ class TodoService (
     fun markImportant(id: String): Mono<Todo>
         = (todoRepository as CustomTodoRepository).markFinished(id)
             .switchIfEmpty(Mono.error(NotFoundException()))
+
+    fun list(user: String): Flux<Todo>
+        = todoRepository.findByUser(
+            user,
+            Sort.by(Sort.Order.desc("isImportant"), Sort.Order.asc("isFinished"))
+    )
 }
 
 class NotFoundException: Exception()
