@@ -20,6 +20,6 @@ fun main(args: Array<String>) {
 @EnableScheduling
 class TodoConfiguration {
 
-    @Bean
+    @Bean(name = ["taskExecutor"])
     fun threadPoolTaskExecutor() = ThreadPoolTaskExecutor()
 }
