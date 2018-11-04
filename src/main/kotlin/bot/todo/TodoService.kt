@@ -4,6 +4,7 @@ import com.linecorp.bot.model.event.MessageEvent
 import com.linecorp.bot.model.event.message.MessageContent
 import com.linecorp.bot.model.event.message.TextMessageContent
 import org.springframework.data.domain.Sort
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -14,6 +15,7 @@ class TodoService (
         val lineService: LineService
 ) {
 
+    @Async
     fun process(event: MessageEvent<MessageContent>) {
         val user = event.source.userId
         val message = event.message
