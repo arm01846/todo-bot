@@ -23,6 +23,6 @@ data class Todo(
 
 data class TodoReport(
         val user: String,
-        val finished: Int,
-        val unfinished: Int
+        val finished: Int = 0,
+        val unfinished: Int = 0
 )
