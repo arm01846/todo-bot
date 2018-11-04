@@ -1,5 +1,6 @@
 package bot.todo
 
+import com.linecorp.bot.model.PushMessage
 import com.linecorp.bot.model.ReplyMessage
 import com.linecorp.bot.model.message.TextMessage
 import io.netty.handler.codec.http.HttpHeaderNames
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
+import org.springframework.web.reactive.function.BodyInserter
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
@@ -23,7 +25,14 @@ class LineService(
             .uri("/bot/message/reply")
             .body(BodyInserters.fromObject(ReplyMessage(replyToken, TextMessage(message))))
             .exchange().subscribe()
+    }
 
+    fun sendMessage(user: String, message: String) {
+        this.client
+            .post()
+            .uri("/bot/message/push")
+            .body(BodyInserters.fromObject(PushMessage(user, TextMessage(message))))
+            .exchange().subscribe()
     }
 }
 
